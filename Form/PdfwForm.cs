@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PDFwiz.Entity;
 using PDFwiz.Helper;
+using PDFwiz.Properties;
+using PDFwiz.Constants;
 
 namespace PDFwiz
 {
@@ -26,6 +28,7 @@ namespace PDFwiz
 
             if (mFormCommand.FormCommandType == FormCommandType.Open)
             {
+        
                 //LoadPdfwByDocument(mFormCommand.CommandArgs);
 
                 string pdfwPath = mFormCommand.CommandArgs;
@@ -37,12 +40,22 @@ namespace PDFwiz
 
                 Dictionary<string, FileModel> dic = JsonConvert.DeserializeObject<Dictionary<string, FileModel>>(sDicJson);
                 FileModel pdfModel = dic[Global.PdfDoc];
-              
+
 
                 //FileHelper.WriteBytesFile(docBytes, docPath);
 
                 //WordToPDFHelper.WordToPDF(docPath, pdfPath);
-             
+
+                HistoryItem historyItem = new HistoryItem()
+                {
+                    Name = pdfwModel.Name,
+                    Path = pdfwModel.Path,
+                    Date = DateTime.Now,
+                    Image = ApplicationHelper.GetIconFromFile(pdfwModel.FullName)
+                };
+                AppConfigHelper.GetHistoryList().PutItem(historyItem);
+
+
                 mPdfViewer.LoadFromStream(DataHelper.BytesToStream(pdfModel.Stream));
             }
 

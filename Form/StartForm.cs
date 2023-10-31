@@ -16,6 +16,8 @@ using PDFwiz.Helper;
 using PDFwiz.Properties;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Microsoft.VisualBasic;
+using Spire.Xls.Core;
+using Microsoft.Office.Interop.Word;
 
 namespace PDFwiz
 {
@@ -37,9 +39,25 @@ namespace PDFwiz
 
         private void FillHistoryList()
         {
-            OrderedDictionary historyList = Settings.Default.HistoryList;
-            //historyList
-            //ucHistoryListView.SetList()
+            List<HistoryItem> historyItems = AppConfigHelper.GetHistoryList();
+
+            //HistoryItemControl historyItemControl = new HistoryItemControl();
+            //List<HistoryItemControl> historyItemControls = new List<HistoryItemControl>();
+            //historyItemControl.get
+            //historyItemControls.Add(historyItemControl);
+
+            UserControlItem itemControl = new UserControlItem();
+            itemControl.UserName = "张三";
+            itemControl.UserPost = "会计";
+            itemControl.UserPhoto = Color.Red;
+
+            Lst.Items.Add(itemControl);
+
+
+            historyListBox.DrawMode = DrawMode.OwnerDrawVariable;
+            historyListBox.DataSource = historyItemControls;
+            historyListBox.Height = (int)(new HistoryItemControl().Height * 2.5f);
+            historyListBox.Width = new HistoryItemControl().Width;
         }
 
         private void btnOpen_BtnClick(object sender, EventArgs e)
@@ -74,6 +92,7 @@ namespace PDFwiz
 
         private void OpenFile(string fileName) 
         {
+
             FormCommand formCommand = new FormCommand(FormCommandType.Open, fileName);
             string ext = fileName.Substring(fileName.IndexOf('.') + 1, fileName.Length - (fileName.IndexOf('.') + 1));
             if (ext == "doc" || ext == "docx")
@@ -96,19 +115,27 @@ namespace PDFwiz
 
         private void btnNewPdfw_BtnClick(object sender, EventArgs e)
         {
-            string PM = Interaction.InputBox("", "新建文档", "", 100, 100);
-            if (PM.Length > 0) 
+            using (InputDialogForm inputDialog = new InputDialogForm())
             {
-                string fileName = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\" + PM + ".doc";
-                FormCommand formCommand = new FormCommand(FormCommandType.New, fileName);
-                WordForm wordForm = new WordForm(this, formCommand);
-                wordForm.Show();
+                if (inputDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string userInput = inputDialog.UserInput;
+                    if (userInput.Length>0) 
+                    {
+                        string fileName = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\" + userInput + ".docx";
+                        FormCommand formCommand = new FormCommand(FormCommandType.New, fileName);
+                        WordForm wordForm = new WordForm(this, formCommand);
+                        wordForm.Show();
+                    }
+                   
+                }
             }
+            //string PM = Interaction.InputBox("", "新建文档", "", 500, 500);
         }
 
         private void ucBtnImgClose_BtnClick(object sender, EventArgs e)
         {
-            Application.Exit();
+            System.Windows.Forms.Application.Exit();
         }
 
         //调用系统API
@@ -126,9 +153,62 @@ namespace PDFwiz
             SendMessage((IntPtr)this.Handle, VM_NCLBUTTONDOWN, HTCAPTION, 0);
         }
 
-        private void ucHistoryListView_Load(object sender, EventArgs e)
+        private void btnNewPdfw_MouseEnter(object sender, EventArgs e)
         {
-            
+            ((UCBtnExt)sender).FillColor = Color.Gray;
+        }
+
+        private void btnNewPdfw_MouseLeave(object sender, EventArgs e)
+        {
+            ((UCBtnExt)sender).FillColor = SystemColors.WindowFrame;
+        }
+
+        private void btnOpen_MouseEnter(object sender, EventArgs e)
+        {
+            ((UCBtnExt)sender).FillColor = Color.Gray;
+        }
+
+        private void btnOpen_MouseLeave(object sender, EventArgs e)
+        {
+            ((UCBtnExt)sender).FillColor = SystemColors.WindowFrame;
+        }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index >= 0 && e.Index < historyListBox.Items.Count)
+            {
+                // 获取要绘制的自定义UserControl
+                HistoryItemControl control = (HistoryItemControl)historyListBox.Items[e.Index];
+                // 创建一个大小与自定义UserControl相同的Bitmap
+                Bitmap bitmap = new Bitmap(control.Width, control.Height);
+                // 将自定义UserControl绘制到Bitmap中
+                control.DrawToBitmap(bitmap, new System.Drawing.Rectangle(0, 0, control.Width, control.Height));
+                // 绘制Bitmap到ComboBox中
+                e.Graphics.DrawImage(bitmap, e.Bounds);
+
+                // 绘制选中项获取焦点时的矩形区域
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void historyListBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
+            if (e.Index >= 0 && e.Index < historyListBox.Items.Count)
+            {
+                // 获取要绘制的自定义UserControl
+                HistoryItemControl control = (HistoryItemControl)historyListBox.Items[e.Index];
+                // 创建一个大小与自定义UserControl相同的Bitmap
+                Bitmap bitmap = new Bitmap(control.Width, control.Height);
+                // 将自定义UserControl绘制到Bitmap中
+                control.DrawToBitmap(bitmap, new System.Drawing.Rectangle(0, 0, 200,90));
+                // 绘制Bitmap到ComboBox中
+                e.Graphics.DrawImage(bitmap, e.Bounds);
+
+                // 绘制选中项获取焦点时的矩形区域
+                e.DrawFocusRectangle();
+            }
+
         }
     }
 }

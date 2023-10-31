@@ -2,6 +2,7 @@
 using PDFwiz.Helper.Config;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.Xml;
@@ -14,6 +15,18 @@ namespace PDFwiz.Helper
     internal static class ApplicationHelper
     {
 
+        /// <summary>
+        /// 根据文件名得到系统图标（经修改参数后文件夹也可以）
+        /// </summary>
+        /// <param name="fileName">文件名</param>
+        /// <param name="largeIcon">图标的大小</param>
+        /// <returns></returns>
+        public static System.Drawing.Icon GetIconFromFile(string fileName)
+        {
+            if (System.IO.File.Exists(fileName) == false)
+                return null;
+            return System.Drawing.Icon.ExtractAssociatedIcon(fileName);
+        }
 
         /// <summary>
         /// 设置文件默认打开程序 前提是程序支持参数启动打开文件

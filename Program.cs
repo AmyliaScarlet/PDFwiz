@@ -25,7 +25,7 @@ namespace PDFwiz
             string[] args = Environment.GetCommandLineArgs();
 
             Form form;
-            if (Boolean.Parse(AppConfigHelper.GetValue("DebugMode")))
+            if (Boolean.Parse(AppConfigHelper.Appconfig_GetValue("DebugMode")))
             {
                 form = new TestForm(args);
             }

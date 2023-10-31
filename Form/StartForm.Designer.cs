@@ -29,33 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartForm));
-            this.mHistoryList = new HZH_Controls.Controls.UCListExt();
             this.btnNewPdfw = new HZH_Controls.Controls.UCBtnExt();
             this.btnOpen = new HZH_Controls.Controls.UCBtnExt();
             this.ucBtnImgClose = new HZH_Controls.Controls.UCBtnImg();
             this.label1 = new System.Windows.Forms.Label();
-            this.ucHistoryListView = new HZH_Controls.Controls.UCListExt();
+            this.historyListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // mHistoryList
-            // 
-            this.mHistoryList.AutoScroll = true;
-            this.mHistoryList.AutoSelectFirst = true;
-            this.mHistoryList.ItemBackColor = System.Drawing.Color.White;
-            this.mHistoryList.ItemForeColor = System.Drawing.Color.Black;
-            this.mHistoryList.ItemForeColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.mHistoryList.ItemHeight = 60;
-            this.mHistoryList.ItemSelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.mHistoryList.ItemSelectedForeColor = System.Drawing.Color.White;
-            this.mHistoryList.ItemSelectedForeColor2 = System.Drawing.Color.White;
-            this.mHistoryList.Location = new System.Drawing.Point(12, 70);
-            this.mHistoryList.Name = "mHistoryList";
-            this.mHistoryList.SelectedCanClick = false;
-            this.mHistoryList.Size = new System.Drawing.Size(383, 368);
-            this.mHistoryList.SplitColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.mHistoryList.TabIndex = 0;
-            this.mHistoryList.Title2Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.mHistoryList.TitleFont = new System.Drawing.Font("微软雅黑", 15F);
             // 
             // btnNewPdfw
             // 
@@ -84,6 +63,8 @@
             this.btnNewPdfw.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
             this.btnNewPdfw.TipsText = "";
             this.btnNewPdfw.BtnClick += new System.EventHandler(this.btnNewPdfw_BtnClick);
+            this.btnNewPdfw.MouseEnter += new System.EventHandler(this.btnNewPdfw_MouseEnter);
+            this.btnNewPdfw.MouseLeave += new System.EventHandler(this.btnNewPdfw_MouseLeave);
             // 
             // btnOpen
             // 
@@ -111,6 +92,8 @@
             this.btnOpen.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
             this.btnOpen.TipsText = "";
             this.btnOpen.BtnClick += new System.EventHandler(this.btnOpen_BtnClick);
+            this.btnOpen.MouseEnter += new System.EventHandler(this.btnOpen_MouseEnter);
+            this.btnOpen.MouseLeave += new System.EventHandler(this.btnOpen_MouseLeave);
             // 
             // ucBtnImgClose
             // 
@@ -149,32 +132,23 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(28, 27);
+            this.label1.Location = new System.Drawing.Point(33, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(204, 35);
             this.label1.TabIndex = 5;
             this.label1.Text = "最近访问的文件";
             // 
-            // ucHistoryListView
+            // historyListBox
             // 
-            this.ucHistoryListView.AutoScroll = true;
-            this.ucHistoryListView.AutoSelectFirst = true;
-            this.ucHistoryListView.ItemBackColor = System.Drawing.Color.White;
-            this.ucHistoryListView.ItemForeColor = System.Drawing.Color.Black;
-            this.ucHistoryListView.ItemForeColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.ucHistoryListView.ItemHeight = 60;
-            this.ucHistoryListView.ItemSelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.ucHistoryListView.ItemSelectedForeColor = System.Drawing.Color.White;
-            this.ucHistoryListView.ItemSelectedForeColor2 = System.Drawing.Color.White;
-            this.ucHistoryListView.Location = new System.Drawing.Point(12, 70);
-            this.ucHistoryListView.Name = "ucHistoryListView";
-            this.ucHistoryListView.SelectedCanClick = false;
-            this.ucHistoryListView.Size = new System.Drawing.Size(336, 368);
-            this.ucHistoryListView.SplitColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.ucHistoryListView.TabIndex = 6;
-            this.ucHistoryListView.Title2Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.ucHistoryListView.TitleFont = new System.Drawing.Font("微软雅黑", 15F);
-            this.ucHistoryListView.Load += new System.EventHandler(this.ucHistoryListView_Load);
+            this.historyListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.historyListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.historyListBox.FormattingEnabled = true;
+            this.historyListBox.ItemHeight = 12;
+            this.historyListBox.Location = new System.Drawing.Point(39, 95);
+            this.historyListBox.Name = "historyListBox";
+            this.historyListBox.Size = new System.Drawing.Size(374, 336);
+            this.historyListBox.TabIndex = 6;
+            this.historyListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.historyListBox_DrawItem);
             // 
             // StartForm
             // 
@@ -182,14 +156,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.ucHistoryListView);
+            this.Controls.Add(this.historyListBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ucBtnImgClose);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnNewPdfw);
-            this.Controls.Add(this.mHistoryList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StartForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartForm_MouseDown);
             this.ResumeLayout(false);
@@ -198,13 +172,11 @@
         }
 
         #endregion
-
-        private HZH_Controls.Controls.UCListExt mHistoryList;
         private HZH_Controls.Controls.UCBtnExt btnNewPdfw;
         private HZH_Controls.Controls.UCBtnExt btnOpen;
         private HZH_Controls.Controls.UCBtnImg ucBtnImgClose;
         private System.Windows.Forms.Label label1;
-        private HZH_Controls.Controls.UCListExt ucHistoryListView;
+        private System.Windows.Forms.ListBox historyListBox;
     }
 }
 

@@ -22,13 +22,5 @@ namespace PDFwiz.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.OrderedDictionary HistoryList {
-            get {
-                return ((global::System.Collections.Specialized.OrderedDictionary)(this["HistoryList"]));
-            }
-        }
     }
 }
