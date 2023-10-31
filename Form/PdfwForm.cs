@@ -36,6 +36,10 @@ namespace PDFwiz
                 string docPath = FileHelper.ChangeFilePathExt(pdfwPath, FileType.Word);
 
                 FileModel pdfwModel = FileHelper.ReadFileToFileModel(pdfwPath);
+                pdfwModel.Name = Path.GetFileName(pdfwPath);
+                pdfwModel.FullName = pdfwPath;
+                pdfwModel.Path = Path.GetDirectoryName(pdfwPath);
+
                 string sDicJson = JsonConvert.SerializeObject(pdfwModel.AccessoryObject);
 
                 Dictionary<string, FileModel> dic = JsonConvert.DeserializeObject<Dictionary<string, FileModel>>(sDicJson);
@@ -46,15 +50,7 @@ namespace PDFwiz
 
                 //WordToPDFHelper.WordToPDF(docPath, pdfPath);
 
-                HistoryItem historyItem = new HistoryItem()
-                {
-                    Name = pdfwModel.Name,
-                    Path = pdfwModel.Path,
-                    Date = DateTime.Now,
-                    Image = ApplicationHelper.GetIconFromFile(pdfwModel.FullName)
-                };
-                AppConfigHelper.GetHistoryList().PutItem(historyItem);
-
+                ApplicationHelper.PutHistory(pdfwModel);
 
                 mPdfViewer.LoadFromStream(DataHelper.BytesToStream(pdfModel.Stream));
             }
@@ -85,6 +81,8 @@ namespace PDFwiz
 
         protected override void OnClosed(EventArgs e)
         {
+            this.SizeChanged -= PdfwForm_SizeChanged;
+
             parentForm.Show();
 
             base.OnClosed(e);
@@ -97,9 +95,12 @@ namespace PDFwiz
 
         private void PdfwForm_SizeChanged(object sender, EventArgs e)
         {
-            mPdfViewer.Width = this.Width;
-            mPdfViewer.Height = this.Height - ucBtnEdit.Height;
+            if (mPdfViewer != null) 
+            {
+                mPdfViewer.Width = this.Width;
+                mPdfViewer.Height = this.Height - ucBtnEdit.Height;
 
+            }
         }
     }
 }

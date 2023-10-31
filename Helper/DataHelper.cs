@@ -11,6 +11,9 @@ using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Reflection;
 using System.Data;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace PDFwiz.Helper
 {
@@ -327,6 +330,139 @@ namespace PDFwiz.Helper
         {
             Stream stream = new MemoryStream(bytes);
             return stream;
-        } 
+        }
+
+        public static Bitmap BytesToBitmap(byte[] Bytes)
+        {
+            MemoryStream stream = null;
+            try
+            {
+                stream = new MemoryStream(Bytes);
+                return new System.Drawing.Bitmap((System.Drawing.Image)new System.Drawing.Bitmap(stream));
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
+            catch (ArgumentException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                stream.Close();
+            }
+        }
+        public static byte[] BitmapToBytes(Bitmap bitmap)
+        {
+            // 1.先将BitMap转成内存流
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, ImageFormat.Bmp);
+            ms.Seek(0, SeekOrigin.Begin);
+            // 2.再将内存流转成byte[]并返回
+            byte[] bytes = new byte[ms.Length];
+            ms.Read(bytes, 0, bytes.Length);
+            ms.Dispose();
+            return bytes;
+        }
+
+        /// <summary>
+        /// Image 转成 base64
+        /// </summary>
+        /// <param name="fileFullName"></param>
+        public static string ReadImageToBase64(string fileFullName)
+        {
+            try
+            {
+                Bitmap bmp = new Bitmap(fileFullName);
+                MemoryStream ms = new MemoryStream();
+                var suffix = fileFullName.Substring(fileFullName.LastIndexOf('.') + 1,
+                  fileFullName.Length - fileFullName.LastIndexOf('.') - 1).ToLower();
+                var suffixName = suffix == "png"
+                  ? ImageFormat.Png
+                  : suffix == "jpg" || suffix == "jpeg"
+                    ? ImageFormat.Jpeg
+                    : suffix == "bmp"
+                      ? ImageFormat.Bmp
+                      : suffix == "gif"
+                        ? ImageFormat.Gif
+                        : ImageFormat.Jpeg;
+
+                bmp.Save(ms, suffixName);
+                byte[] arr = new byte[ms.Length]; ms.Position = 0;
+                ms.Read(arr, 0, (int)ms.Length); ms.Close();
+                return Convert.ToBase64String(arr);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static Bitmap Base64ToBitmap(string base64String)
+        {
+            try
+            {
+                byte[] arr = Convert.FromBase64String(base64String);
+                MemoryStream ms = new MemoryStream(arr);
+                Bitmap bmp = new Bitmap(ms);
+                ms.Close();
+                return bmp;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+                return null;
+            } 
+        }
+
+
+        public static string BitmapToBase64(Bitmap bitmap)
+        {
+            try
+            {
+                MemoryStream ms = new MemoryStream();
+                bitmap.Save(ms, ImageFormat.Png);
+                byte[] arr = new byte[ms.Length];
+                ms.Position = 0;
+                ms.Read(arr, 0, (int)ms.Length);
+                ms.Close();
+                String strbaser64 = Convert.ToBase64String(arr);
+                return strbaser64;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+                return "";
+            } 
+        }
+
+        public static Bitmap ZoomBitmap(Bitmap bitmap, int w, int h)
+        {
+            // 计算缩放比例
+            float scaleX = (float)w / bitmap.Width;
+            float scaleY = (float)h / bitmap.Height;
+
+            // 创建一个新的 Bitmap 对象，大小为缩放后的尺寸
+            Bitmap newBitmap = new Bitmap(w, h);
+
+            // 创建一个 Matrix 对象，用于缩放和平移
+            Matrix matrix = new Matrix();
+            matrix.Scale(scaleX, scaleY);
+            matrix.Translate(w / 2 - bitmap.Width / 2, h / 2 - bitmap.Height / 2);
+
+            // 使用 Graphics 对象绘制缩放后的 Bitmap
+            using (Graphics g = Graphics.FromImage(newBitmap))
+            {
+                // 应用矩阵变换
+                g.TranslateClip(matrix.OffsetX,matrix.OffsetY);
+
+                // 将原始 Bitmap 绘制到新的 Bitmap 上
+                g.DrawImage(bitmap, 0, 0, w, h);
+            }
+
+            return newBitmap;
+        }
+
     }
 }

@@ -217,14 +217,7 @@ namespace PDFwiz
 
             }
 
-            HistoryItem historyItem = new HistoryItem()
-            {
-                Name = docModel.Name,
-                Path = docModel.Path,
-                Date = DateTime.Now,
-                Image = ApplicationHelper.GetIconFromFile(docModel.FullName)
-            };
-            AppConfigHelper.GetHistoryList().PutItem(historyItem);
+            ApplicationHelper.PutHistory(docModel);
 
         }
 

@@ -53,7 +53,7 @@
             this.btnOK.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOK.BtnForeColor = System.Drawing.Color.White;
             this.btnOK.BtnText = "确  认";
-            this.btnOK.ConerRadius = 5;
+            this.btnOK.ConerRadius = 2;
             this.btnOK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOK.EnabledMouseEffect = false;
             this.btnOK.FillColor = System.Drawing.SystemColors.WindowFrame;
@@ -81,7 +81,7 @@
             this.btnCancel.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.BtnForeColor = System.Drawing.Color.White;
             this.btnCancel.BtnText = "取  消";
-            this.btnCancel.ConerRadius = 5;
+            this.btnCancel.ConerRadius = 2;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.EnabledMouseEffect = false;
             this.btnCancel.FillColor = System.Drawing.SystemColors.WindowFrame;

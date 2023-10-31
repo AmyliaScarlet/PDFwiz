@@ -1,7 +1,11 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using PDFwiz.Constants;
+using PDFwiz.Entity;
 using PDFwiz.Helper.Config;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -14,6 +18,20 @@ namespace PDFwiz.Helper
 {
     internal static class ApplicationHelper
     {
+
+
+        public static void PutHistory(FileModel fileModel)
+        {
+            HistoryItem historyItem = new HistoryItem()
+            {
+                Name = fileModel.Name,
+                Path = fileModel.Path,
+                Date = DateTime.Now,
+                Image = DataHelper.BitmapToBase64(ApplicationHelper.GetIconFromFile(fileModel.FullName).ToBitmap())
+            };
+            AppConfigHelper.GetHistoryList().PutItem(historyItem);
+        }
+
 
         /// <summary>
         /// 根据文件名得到系统图标（经修改参数后文件夹也可以）

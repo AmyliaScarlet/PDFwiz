@@ -102,7 +102,8 @@ namespace PDFwiz.Helper
         internal static FileModel CreatePdfwModel(FileModel fileModel, FileModel pdfModel)
         {
             FileModel pdfwModel = new FileModel();
-            pdfwModel.Name = fileModel.ShortName;
+            pdfwModel.Name = fileModel.Name;
+            pdfwModel.ShortName = fileModel.ShortName;
             pdfwModel.CreateDate = DateTime.Now;
             pdfwModel.bOriginal = fileModel.bOriginal;
             pdfwModel.Ext = "pdfw";

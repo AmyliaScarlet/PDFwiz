@@ -19,6 +19,8 @@ using Microsoft.VisualBasic;
 using Spire.Xls.Core;
 using Microsoft.Office.Interop.Word;
 using System.IO;
+using PDFwiz.Constants;
+using Newtonsoft.Json;
 
 namespace PDFwiz
 {
@@ -35,7 +37,16 @@ namespace PDFwiz
 
             
 
+         
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
             FillHistoryList();
+
+            btnNewPdfw.Focus();
         }
 
         private void FillHistoryList()
@@ -43,7 +54,7 @@ namespace PDFwiz
             historyListBox.DrawMode = DrawMode.OwnerDrawVariable;
 
             List<HistoryItem> historyItems = AppConfigHelper.GetHistoryList();
-
+            historyItems = historyItems.OrderByDescending(i => i.Date).ToList();
             //HistoryItemControl historyItemControl = new HistoryItemControl();
             //List<HistoryItemControl> historyItemControls = new List<HistoryItemControl>();
             //historyItemControl.get
@@ -54,9 +65,10 @@ namespace PDFwiz
                 HistoryItemControl itemControl = new HistoryItemControl();
                 itemControl.vName = item.Name;
                 itemControl.vPath = item.Path;
+
                 if (item.Image != null) 
                 {
-                    itemControl.vImage = item.Image.ToBitmap();
+                    itemControl.vImage = DataHelper.Base64ToBitmap(item.Image);
                 }
                 itemControl.vDate = item.Date.ToString("yyyy/MM/dd");
 
@@ -89,9 +101,7 @@ namespace PDFwiz
             {
                 string fileName = openFileDialog.FileName;
 
-                OpenFile(fileName);
-
-                this.Hide();
+                OpenFile(fileName);  
             }
 
 
@@ -99,7 +109,7 @@ namespace PDFwiz
 
         private void OpenFile(string fileName) 
         {
-
+            this.Hide();
             FormCommand formCommand = new FormCommand(FormCommandType.Open, fileName);
             string ext = fileName.Substring(fileName.IndexOf('.') + 1, fileName.Length - (fileName.IndexOf('.') + 1));
             if (ext == "doc" || ext == "docx")
@@ -117,7 +127,7 @@ namespace PDFwiz
                 PdfwForm pdfwForm = new PdfwForm(this, formCommand);
                 pdfwForm.Show();
             }
-
+            
         }
 
         private void btnNewPdfw_BtnClick(object sender, EventArgs e)
@@ -231,6 +241,18 @@ namespace PDFwiz
             HistoryItemControl control = (HistoryItemControl)historyListBox.SelectedItem;
             string filename = Path.Combine(control.vPath,control.vName);
             OpenFile(filename);
+            
         }
+
+        //private void historyListBox_MouseHover(object sender, EventArgs e)
+        //{
+        //    //var screenMousePos = Cursor.Position;
+        //    ////var chartMousePos = historyListBox.PointToClient(screenMousePos);
+
+        //    //HistoryItemControl control = (HistoryItemControl)((ListBox)sender).GetChildAtPoint(screenMousePos, GetChildAtPointSkip.None);
+        //    //if (control != null)
+        //    //    control.BackColor = Color.White;
+
+        //}
     }
 }

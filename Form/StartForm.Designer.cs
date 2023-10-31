@@ -43,7 +43,7 @@
             this.btnNewPdfw.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNewPdfw.BtnForeColor = System.Drawing.Color.White;
             this.btnNewPdfw.BtnText = "新  建";
-            this.btnNewPdfw.ConerRadius = 5;
+            this.btnNewPdfw.ConerRadius = 2;
             this.btnNewPdfw.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNewPdfw.EnabledMouseEffect = false;
             this.btnNewPdfw.FillColor = System.Drawing.SystemColors.WindowFrame;
@@ -73,7 +73,7 @@
             this.btnOpen.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpen.BtnForeColor = System.Drawing.Color.White;
             this.btnOpen.BtnText = "打  开";
-            this.btnOpen.ConerRadius = 5;
+            this.btnOpen.ConerRadius = 2;
             this.btnOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOpen.EnabledMouseEffect = false;
             this.btnOpen.FillColor = System.Drawing.SystemColors.WindowFrame;
@@ -142,12 +142,15 @@
             // 
             this.historyListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.historyListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.historyListBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.historyListBox.FormattingEnabled = true;
+            this.historyListBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.historyListBox.ItemHeight = 12;
             this.historyListBox.Location = new System.Drawing.Point(39, 95);
             this.historyListBox.Name = "historyListBox";
             this.historyListBox.Size = new System.Drawing.Size(374, 336);
             this.historyListBox.TabIndex = 6;
+            this.historyListBox.TabStop = false;
             this.historyListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.historyListBox_DrawItem);
             this.historyListBox.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.historyListBox_MeasureItem);
             this.historyListBox.SelectedIndexChanged += new System.EventHandler(this.historyListBox_SelectedIndexChanged);
@@ -178,7 +181,7 @@
         private HZH_Controls.Controls.UCBtnExt btnOpen;
         private HZH_Controls.Controls.UCBtnImg ucBtnImgClose;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox historyListBox;
+        public System.Windows.Forms.ListBox historyListBox;
     }
 }
 

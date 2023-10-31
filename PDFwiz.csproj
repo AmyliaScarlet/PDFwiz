@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\ExpandMethod.cs" />
+    <Compile Include="Constants\UniqueList.cs" />
     <Compile Include="Entity\FileModel.cs" />
     <Compile Include="Entity\FormCommand.cs" />
     <Compile Include="Constants\Global.cs" />

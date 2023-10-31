@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using PDFwiz.Constants;
 using PDFwiz.Entity;
+using PDFwiz.Helper;
 
 namespace PDFwiz
 {
@@ -25,19 +27,36 @@ namespace PDFwiz
 
         protected override void OnClosed(EventArgs e)
         {
-            
-            mPdfViewer.CloseDocument();
+            this.SizeChanged -= PdfForm_SizeChanged;
+            if (mPdfViewer != null) 
+            {
+                try
+                {
+                    mPdfViewer.CloseDocument();
+                    //mPdfViewer.Dispose();
 
-            base.OnClosed(e);
+                }
+                catch { 
+                
+                }
+            }
+                
             parentForm.Show();
 
-            
+           
         }
 
         public void LoadPdfByDocument(string fileName)
         {
+
+
             mPdfViewer.LoadFromFile(fileName);
-            
+
+            FileModel pdfModel = FileHelper.CreateFileModel(fileName);
+
+            ApplicationHelper.PutHistory(pdfModel);
+
+
 
             //创建一个PDFView控件
             //PdfViewer pdfViewer1 = new PdfViewer();
@@ -56,9 +75,11 @@ namespace PDFwiz
 
         private void PdfForm_SizeChanged(object sender, EventArgs e)
         {
-            mPdfViewer.Width = this.Width;
-            mPdfViewer.Height = this.Height;
-
+            if (mPdfViewer != null) 
+            {
+                mPdfViewer.Width = this.Width;
+                mPdfViewer.Height = this.Height;
+            }
         }
     }
 }

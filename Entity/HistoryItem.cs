@@ -13,14 +13,25 @@ namespace PDFwiz.Entity
         private int _id;
         private string _name;
         private string _path;
-        private System.Drawing.Icon _image;
+        private string _image;
         private DateTime _datetime;
 
         public int Id { get { return _id; } set { _id = value; } }
         public string Name { get { return _name; } set { _name = value; } }
         public string Path { get { return _path; } set { _path = value; } }
-        public System.Drawing.Icon Image { get { return _image; } set { _image = value; } }
+        //System.Drawing.Icon => 
+        public string Image { get { return _image; } set { _image = value; } }
         public DateTime Date { get { return _datetime; } set { _datetime = value; } }
+
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+            return obj is HistoryItem historyItem &&
+                        Name == historyItem.Name &&
+                        Path == historyItem.Path;
+        }
+
+       
 
     }
 }

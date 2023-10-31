@@ -13,9 +13,10 @@ namespace PDFwiz.Constants
     {
         internal static void PutItem(this List<HistoryItem> historyItems, HistoryItem item)
         {
-            historyItems.AddToMax(item ,5);
-
-            AppConfigHelper.SetHistoryList(historyItems);
+            UniqueList<HistoryItem> uHistoryItems = new UniqueList<HistoryItem>(historyItems,5);
+            uHistoryItems.Add(item);
+   
+            AppConfigHelper.SetHistoryList(uHistoryItems.ToList());
         }
 
         internal static void AddToMax<T>(this List<T> list, T item, int maxNum)
