@@ -75,7 +75,7 @@ namespace PDFwiz
                 historyListBox.Items.Add(itemControl);
             }
 
-            historyListBox.Height = (int)(new HistoryItemControl().Height * 2.5f);
+            historyListBox.Height = (int)(new HistoryItemControl().Height * historyItems.Count);
             historyListBox.Width = new HistoryItemControl().Width;
         }
 

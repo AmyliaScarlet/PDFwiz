@@ -27,7 +27,7 @@ namespace PDFwiz.Helper
                 Name = fileModel.Name,
                 Path = fileModel.Path,
                 Date = DateTime.Now,
-                Image = DataHelper.BitmapToBase64(ApplicationHelper.GetIconFromFile(fileModel.FullName).ToBitmap())
+                Image = DataHelper.BitmapToBase64(DataHelper.ZoomBitmap(ApplicationHelper.GetIconFromFile(fileModel.FullName).ToBitmap(),40,40))
             };
             AppConfigHelper.GetHistoryList().PutItem(historyItem);
         }

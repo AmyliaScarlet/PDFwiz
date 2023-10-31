@@ -40,19 +40,19 @@
             // 
             this.btnNewPdfw.BackColor = System.Drawing.Color.Transparent;
             this.btnNewPdfw.BtnBackColor = System.Drawing.Color.Transparent;
-            this.btnNewPdfw.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnNewPdfw.BtnFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnNewPdfw.BtnForeColor = System.Drawing.Color.White;
             this.btnNewPdfw.BtnText = "新  建";
             this.btnNewPdfw.ConerRadius = 2;
             this.btnNewPdfw.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNewPdfw.EnabledMouseEffect = false;
             this.btnNewPdfw.FillColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnNewPdfw.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnNewPdfw.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnNewPdfw.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.btnNewPdfw.IsRadius = true;
             this.btnNewPdfw.IsShowRect = true;
             this.btnNewPdfw.IsShowTips = false;
-            this.btnNewPdfw.Location = new System.Drawing.Point(567, 86);
+            this.btnNewPdfw.Location = new System.Drawing.Point(560, 87);
             this.btnNewPdfw.Margin = new System.Windows.Forms.Padding(0);
             this.btnNewPdfw.Name = "btnNewPdfw";
             this.btnNewPdfw.RectColor = System.Drawing.SystemColors.ButtonShadow;
@@ -70,18 +70,18 @@
             // 
             this.btnOpen.BackColor = System.Drawing.Color.Transparent;
             this.btnOpen.BtnBackColor = System.Drawing.Color.Transparent;
-            this.btnOpen.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOpen.BtnFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOpen.BtnForeColor = System.Drawing.Color.White;
             this.btnOpen.BtnText = "打  开";
             this.btnOpen.ConerRadius = 2;
             this.btnOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOpen.EnabledMouseEffect = false;
             this.btnOpen.FillColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnOpen.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnOpen.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnOpen.IsRadius = true;
             this.btnOpen.IsShowRect = true;
             this.btnOpen.IsShowTips = false;
-            this.btnOpen.Location = new System.Drawing.Point(567, 156);
+            this.btnOpen.Location = new System.Drawing.Point(560, 162);
             this.btnOpen.Margin = new System.Windows.Forms.Padding(0);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.RectColor = System.Drawing.SystemColors.ButtonShadow;
@@ -102,7 +102,7 @@
             this.ucBtnImgClose.BtnFont = new System.Drawing.Font("微软雅黑", 40F);
             this.ucBtnImgClose.BtnForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             this.ucBtnImgClose.BtnText = "";
-            this.ucBtnImgClose.ConerRadius = 5;
+            this.ucBtnImgClose.ConerRadius = 2;
             this.ucBtnImgClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ucBtnImgClose.EnabledMouseEffect = false;
             this.ucBtnImgClose.FillColor = System.Drawing.SystemColors.WindowFrame;
