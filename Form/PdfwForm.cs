@@ -25,7 +25,7 @@ namespace PDFwiz
             InitializeComponent();
 
             parentForm = mParentForm;
-
+            parentForm.Hide();
             if (mFormCommand.FormCommandType == FormCommandType.Open)
             {
         

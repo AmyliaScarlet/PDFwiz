@@ -109,7 +109,7 @@ namespace PDFwiz
 
         private void OpenFile(string fileName) 
         {
-            this.Hide();
+            
             FormCommand formCommand = new FormCommand(FormCommandType.Open, fileName);
             string ext = fileName.Substring(fileName.IndexOf('.') + 1, fileName.Length - (fileName.IndexOf('.') + 1));
             if (ext == "doc" || ext == "docx")
@@ -127,7 +127,7 @@ namespace PDFwiz
                 PdfwForm pdfwForm = new PdfwForm(this, formCommand);
                 pdfwForm.Show();
             }
-            
+            this.Hide();
         }
 
         private void btnNewPdfw_BtnClick(object sender, EventArgs e)
