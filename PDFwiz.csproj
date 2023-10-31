@@ -134,14 +134,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\ExpandMethod.cs" />
-    <Compile Include="Constants\UniqueList.cs" />
+    <Compile Include="Customize\ExpandMethod.cs" />
+    <Compile Include="Customize\UniqueList.cs" />
     <Compile Include="Entity\FileModel.cs" />
     <Compile Include="Entity\FormCommand.cs" />
     <Compile Include="Constants\Global.cs" />
     <Compile Include="Constants\Enum.cs" />
     <Compile Include="Entity\HistoryItem.cs" />
-    <Compile Include="Entity\HistoryItemControl.cs">
+    <Compile Include="Customize\HistoryItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Helper\AppConfigHelper.cs" />
@@ -191,7 +191,7 @@
     <Compile Include="TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Entity\HistoryItemControl.resx">
+    <EmbeddedResource Include="Customize\HistoryItemControl.resx">
       <DependentUpon>HistoryItemControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\PdfForm.resx">
