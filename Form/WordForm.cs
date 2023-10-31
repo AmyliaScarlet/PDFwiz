@@ -17,6 +17,7 @@ using PDFwiz.Helper;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using WordLib = Microsoft.Office.Interop.Word;
+using PDFwiz.Constants;
 
 namespace PDFwiz
 {
@@ -150,6 +151,8 @@ namespace PDFwiz
             {
                 string docPath = Doc.FullName;
 
+
+
                 ConvertPdfAndPdfw(docPath, Doc);
 
                 //FileHelper.SavePdfw(FileHelper.ChangeFilePathExt(path,FileType.Pdfw),path);
@@ -213,8 +216,18 @@ namespace PDFwiz
                 //FileHelper.WriteBytesFile(pdfwBytes, FileHelper.ChangeFilePathExt(docPath, FileType.Pdfw));
 
             }
+
+            HistoryItem historyItem = new HistoryItem()
+            {
+                Name = docModel.Name,
+                Path = docModel.Path,
+                Date = DateTime.Now,
+                Image = ApplicationHelper.GetIconFromFile(docModel.FullName)
+            };
+            AppConfigHelper.GetHistoryList().PutItem(historyItem);
+
         }
- 
+
 
         private void WordForm_SizeChanged(object sender, EventArgs e)
         {

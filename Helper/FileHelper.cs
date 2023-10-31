@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using PDFwiz.Entity;
 using static System.Windows.Forms.AxHost;
+using PDFwiz.Constants;
 
 namespace PDFwiz.Helper
 {
@@ -191,7 +192,7 @@ namespace PDFwiz.Helper
                 using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
                 {
                     json = DataHelper.GetDESEncrypt(json);
-                    byte[] b1 = Encoding.UTF8.GetBytes(json);
+                    byte[] b1 = DataHelper.CompressBytes(json.Encode2Bytes());
                     binaryWriter.Write(b1);
                 }
             }
@@ -205,8 +206,8 @@ namespace PDFwiz.Helper
                 using (BinaryReader binaryReader = new BinaryReader(fileStream))
                 {
                     byte[] b1 = binaryReader.ReadBytes((int)fileStream.Length);
-                    json = Encoding.UTF8.GetString(b1);
-                    
+
+                    json = DataHelper.DecompressBytes(b1).Encode2String();
 
                     json = DataHelper.GetDESDecrypt(json);
                 }

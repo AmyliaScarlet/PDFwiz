@@ -149,6 +149,8 @@
             this.historyListBox.Size = new System.Drawing.Size(374, 336);
             this.historyListBox.TabIndex = 6;
             this.historyListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.historyListBox_DrawItem);
+            this.historyListBox.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.historyListBox_MeasureItem);
+            this.historyListBox.SelectedIndexChanged += new System.EventHandler(this.historyListBox_SelectedIndexChanged);
             // 
             // StartForm
             // 

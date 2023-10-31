@@ -39,6 +39,8 @@ namespace PDFwiz
 
         private void FillHistoryList()
         {
+            historyListBox.DrawMode = DrawMode.OwnerDrawVariable;
+
             List<HistoryItem> historyItems = AppConfigHelper.GetHistoryList();
 
             //HistoryItemControl historyItemControl = new HistoryItemControl();
@@ -46,16 +48,20 @@ namespace PDFwiz
             //historyItemControl.get
             //historyItemControls.Add(historyItemControl);
 
-            UserControlItem itemControl = new UserControlItem();
-            itemControl.UserName = "张三";
-            itemControl.UserPost = "会计";
-            itemControl.UserPhoto = Color.Red;
+            foreach (HistoryItem item in historyItems)
+            {
+                HistoryItemControl itemControl = new HistoryItemControl();
+                itemControl.vName = item.Name;
+                itemControl.vPath = item.Path;
+                if (item.Image != null) 
+                {
+                    itemControl.vImage = item.Image.ToBitmap();
+                }
+                itemControl.vDate = item.Date.ToString("yyyy/MM/dd");
 
-            Lst.Items.Add(itemControl);
+                historyListBox.Items.Add(itemControl);
+            }
 
-
-            historyListBox.DrawMode = DrawMode.OwnerDrawVariable;
-            historyListBox.DataSource = historyItemControls;
             historyListBox.Height = (int)(new HistoryItemControl().Height * 2.5f);
             historyListBox.Width = new HistoryItemControl().Width;
         }
@@ -201,7 +207,7 @@ namespace PDFwiz
                 // 创建一个大小与自定义UserControl相同的Bitmap
                 Bitmap bitmap = new Bitmap(control.Width, control.Height);
                 // 将自定义UserControl绘制到Bitmap中
-                control.DrawToBitmap(bitmap, new System.Drawing.Rectangle(0, 0, 200,90));
+                control.DrawToBitmap(bitmap, new System.Drawing.Rectangle(0, 0, control.Width, control.Height));
                 // 绘制Bitmap到ComboBox中
                 e.Graphics.DrawImage(bitmap, e.Bounds);
 
@@ -209,6 +215,20 @@ namespace PDFwiz
                 e.DrawFocusRectangle();
             }
 
+        }
+
+        private void historyListBox_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+            // 获取要测量的自定义UserControl
+            HistoryItemControl control = (HistoryItemControl)historyListBox.Items[e.Index];
+            // 设置项的高度为自定义UserControl的高度
+            e.ItemHeight = control.Height;
+        }
+
+        private void historyListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HistoryItemControl control = (HistoryItemControl)historyListBox.SelectedItem;
+            string vName = control.vName;
         }
     }
 }

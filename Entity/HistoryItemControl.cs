@@ -1,6 +1,7 @@
 ﻿using HZH_Controls;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,28 @@ namespace PDFwiz.Entity
 
         }
 
+        public string vName
+        {
+            get { return lbName.Text; }
+            set { lbName.Text = value; }
+        }
+
+        public string vPath
+        {
+            get { return lbPath.Text; }
+            set { lbPath.Text = value; }
+        }
+        public string vDate
+        {
+            get { return lbDate.Text; }
+            set { lbDate.Text = value; }
+        }
+        public Image vImage
+        {
+            get { return pbImage.Image; }
+            set { pbImage.Image = value; }
+        }
+
         private void InitializeComponent()
         {
             this.lbName = new System.Windows.Forms.Label();
@@ -34,28 +57,28 @@ namespace PDFwiz.Entity
             // lbName
             // 
             this.lbName.AutoSize = true;
-            this.lbName.Location = new System.Drawing.Point(160, 34);
+            this.lbName.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbName.ForeColor = System.Drawing.Color.White;
+            this.lbName.Location = new System.Drawing.Point(93, 22);
             this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(71, 12);
+            this.lbName.Size = new System.Drawing.Size(39, 16);
             this.lbName.TabIndex = 0;
             this.lbName.Text = "Name";
             // 
             // pbImage
             // 
-            this.pbImage.Location = new System.Drawing.Point(22, 25);
+            this.pbImage.Location = new System.Drawing.Point(17, 22);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(100, 100);
+            this.pbImage.Size = new System.Drawing.Size(55, 55);
             this.pbImage.TabIndex = 1;
             this.pbImage.TabStop = false;
-            //if (Image != null)
-            //{
-            //    this.pbImage.Image = Image.ToBitmap();
-            //}
+            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
             // 
             // lbPath
             // 
             this.lbPath.AutoSize = true;
-            this.lbPath.Location = new System.Drawing.Point(160, 58);
+            this.lbPath.ForeColor = System.Drawing.Color.Gray;
+            this.lbPath.Location = new System.Drawing.Point(94, 39);
             this.lbPath.Name = "lbPath";
             this.lbPath.Size = new System.Drawing.Size(29, 12);
             this.lbPath.TabIndex = 2;
@@ -64,23 +87,31 @@ namespace PDFwiz.Entity
             // lbDate
             // 
             this.lbDate.AutoSize = true;
-            this.lbDate.Location = new System.Drawing.Point(160, 104);
+            this.lbDate.ForeColor = System.Drawing.Color.White;
+            this.lbDate.Location = new System.Drawing.Point(94, 65);
             this.lbDate.Name = "lbDate";
             this.lbDate.Size = new System.Drawing.Size(29, 12);
             this.lbDate.TabIndex = 3;
-            this.lbDate.Text = "Date";// this.Date.ToString("yyyy/MM/dd");
+            this.lbDate.Text = "Date";
             // 
             // HistoryItemControl
             // 
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Controls.Add(this.lbDate);
             this.Controls.Add(this.lbPath);
             this.Controls.Add(this.pbImage);
             this.Controls.Add(this.lbName);
             this.Name = "HistoryItemControl";
-            this.Size = new System.Drawing.Size(469, 150);
+            this.Size = new System.Drawing.Size(319, 98);
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+
+        private void pbImage_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

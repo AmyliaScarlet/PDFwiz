@@ -13,9 +13,31 @@ namespace PDFwiz.Constants
     {
         internal static void PutItem(this List<HistoryItem> historyItems, HistoryItem item)
         {
-            historyItems.Add(item);
+            historyItems.AddToMax(item ,5);
 
             AppConfigHelper.SetHistoryList(historyItems);
+        }
+
+        internal static void AddToMax<T>(this List<T> list, T item, int maxNum)
+        {
+            if (list.Count < maxNum)
+            {
+                list.Add(item);
+            }
+            else
+            {
+                list.RemoveAt(0);
+                list.Add(item);
+            }
+        }
+
+        internal static string Encode2String(this byte[] data)
+        {
+            return Encoding.GetEncoding(Global.GET_ENCODING).GetString(data);
+        }
+        internal static byte[] Encode2Bytes(this string data)
+        {
+            return Encoding.GetEncoding(Global.GET_ENCODING).GetBytes(data);
         }
     }
 }

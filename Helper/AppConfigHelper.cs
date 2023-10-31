@@ -77,7 +77,7 @@ namespace PDFwiz.Helper
             }
 
             string json = DataHelper.GetDESDecrypt(value);
-
+            json = json.Replace($"\"Image\":\"(图标)\"", "\"Image\":\"\"");
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             List<HistoryItem> historyItems = JsonConvert.DeserializeObject<List<HistoryItem>>(json, settings);
