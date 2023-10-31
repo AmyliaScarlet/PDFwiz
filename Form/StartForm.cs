@@ -18,6 +18,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Microsoft.VisualBasic;
 using Spire.Xls.Core;
 using Microsoft.Office.Interop.Word;
+using System.IO;
 
 namespace PDFwiz
 {
@@ -228,7 +229,8 @@ namespace PDFwiz
         private void historyListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             HistoryItemControl control = (HistoryItemControl)historyListBox.SelectedItem;
-            string vName = control.vName;
+            string filename = Path.Combine(control.vPath,control.vName);
+            OpenFile(filename);
         }
     }
 }
