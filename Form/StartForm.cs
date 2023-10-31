@@ -134,7 +134,7 @@ namespace PDFwiz
         {
             using (InputDialogForm inputDialog = new InputDialogForm())
             {
-                if (inputDialog.ShowDialog() == DialogResult.OK)
+                if (inputDialog.ShowDialog(this) == DialogResult.OK)
                 {
                     string userInput = inputDialog.UserInput;
                     if (userInput.Length>0) 
@@ -147,7 +147,6 @@ namespace PDFwiz
                    
                 }
             }
-            //string PM = Interaction.InputBox("", "新建文档", "", 500, 500);
         }
 
         private void ucBtnImgClose_BtnClick(object sender, EventArgs e)

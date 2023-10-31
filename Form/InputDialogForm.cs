@@ -17,6 +17,7 @@ namespace PDFwiz
 
         public InputDialogForm()
         {
+            this.ShowInTaskbar = false;
             InitializeComponent();
         }
 

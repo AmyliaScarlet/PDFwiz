@@ -149,10 +149,10 @@
     <Compile Include="Helper\DataHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\RandomHelper.cs" />
-    <Compile Include="InputDialogForm.cs">
+    <Compile Include="Form\InputDialogForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InputDialogForm.Designer.cs">
+    <Compile Include="Form\InputDialogForm.Designer.cs">
       <DependentUpon>InputDialogForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\IDocumentPreview.cs" />
@@ -200,7 +200,7 @@
     <EmbeddedResource Include="Form\PdfwForm.resx">
       <DependentUpon>PdfwForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InputDialogForm.resx">
+    <EmbeddedResource Include="Form\InputDialogForm.resx">
       <DependentUpon>InputDialogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
