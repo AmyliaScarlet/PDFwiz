@@ -294,20 +294,19 @@ namespace PDFwiz
         }
 
 
-     
 
         protected override void OnClosed(EventArgs e)
         {
             TryQuitWordApplication();
 
-            
             //parentForm.Show();
 
-
             ApplicationStateMachine.Instance.NextState();
+
            
             base.OnClosed(e);
 
+            FormComm.Instance.SendMessage("", "", "ApplicationExit");
         }
     }
 }

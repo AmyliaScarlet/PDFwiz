@@ -90,6 +90,8 @@ namespace PDFwiz
             ApplicationStateMachine.Instance.NextState();
 
             base.OnClosed(e);
+
+            FormComm.Instance.SendMessage("", "", "ApplicationExit");
         }
 
         private void ucBtnEdit_BtnClick(object sender, EventArgs e)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PdfForm));
             this.mPdfViewer = new Spire.PdfViewer.Forms.PdfViewer();
             this.SuspendLayout();
             // 
@@ -53,6 +54,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.mPdfViewer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PdfForm";
             this.Text = "PdfForm";
             this.SizeChanged += new System.EventHandler(this.PdfForm_SizeChanged);

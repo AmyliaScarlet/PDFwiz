@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PdfwForm));
             this.mPdfViewer = new Spire.PdfViewer.Forms.PdfViewer();
             this.ucBtnEdit = new HZH_Controls.Controls.UCBtnExt();
             this.SuspendLayout();
@@ -82,6 +83,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.ucBtnEdit);
             this.Controls.Add(this.mPdfViewer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PdfwForm";
             this.Text = "PdfwForm";
             this.SizeChanged += new System.EventHandler(this.PdfwForm_SizeChanged);

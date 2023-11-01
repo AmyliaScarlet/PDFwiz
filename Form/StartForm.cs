@@ -28,32 +28,37 @@ namespace PDFwiz
 {
     public partial class StartForm : Form
     {
-        
+        bool bOpenFile = false;
 
         public StartForm(string[] args)
         {
-            InitializeComponent();
-            FormComm.Instance.AddListenner(this.Name, this);
-
-
-            if (args.Length >= 2) 
+            if (args.Length >= 2)
             {
+                bOpenFile = true;
+
                 OpenFile(args[1]);
             }
-
-            
-
-         
+            InitializeComponent();
+            FormComm.Instance.AddListenner(this.Name, this);
+  
         }
 
         protected override void OnShown(EventArgs e)
         {
-            base.OnShown(e);
-            ApplicationStateMachine.Instance.NextState();
+            if (bOpenFile)
+            {
+                this.Hide();
+            }
+            else 
+            {
+                base.OnShown(e);
 
-            FillHistoryList();
 
-            btnNewPdfw.Focus();
+                FillHistoryList();
+
+                btnNewPdfw.Focus();
+            }
+           
         }
 
         private void FillHistoryList()

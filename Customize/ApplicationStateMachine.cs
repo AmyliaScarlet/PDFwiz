@@ -68,11 +68,7 @@ namespace PDFwiz.Customize
                 case ApplicationState.onStart:
                     break;
                 case ApplicationState.onNew:
-                    if (state != ApplicationState.onStart) 
-                    {
-                        throw new ArgumentException("State Err:"+ CurrentState() + " -> " + state);
-                    }
-                    return _currentState;
+                    break;
                 case ApplicationState.onOpenWord:
                     if (state != ApplicationState.onStart)
                     {

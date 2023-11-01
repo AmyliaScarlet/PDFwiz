@@ -32,6 +32,7 @@ namespace PDFwiz
             else 
             {
                 form = new StartForm(args);
+                form.Visible = false;
                 form.StartPosition = FormStartPosition.CenterScreen;
             }
 

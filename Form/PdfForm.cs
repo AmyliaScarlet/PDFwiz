@@ -38,7 +38,10 @@ namespace PDFwiz
 
             ApplicationStateMachine.Instance.NextState();
 
+
             base.OnClosed(e);
+
+            FormComm.Instance.SendMessage("", "", "ApplicationExit");
         }
 
         public void LoadPdfByDocument(string fileName)

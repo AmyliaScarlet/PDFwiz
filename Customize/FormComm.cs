@@ -53,22 +53,26 @@ namespace PDFwiz.Customize
                 //form.Invoke(new Action(() => form.Text = message.MessageText));
                 if (message.MessageText == "ApplicationStateChange")
                 {
-                    switch (ApplicationStateMachine.Instance.CurrentState()) 
+                    switch (ApplicationStateMachine.Instance.CurrentState())
                     {
-                        case ApplicationState.onStart:        
+                        case ApplicationState.onStart:
                             foreach (var item in _forms)
                             {
                                 item.Value.Hide();
                             }
-                            _forms["StartForm"].Close();
+                            _forms["StartForm"].Hide();
                             break;
                         default:
                             _forms["StartForm"].Hide();
                             break;
                     }
 
+                } 
+                else if (message.MessageText == "ApplicationExit") 
+                {
+                    Application.Exit();
                 }
-                else 
+                else
                 {
                     Form form = _forms[message.FormName];
                     Form fform = _forms[message.FromFormName];
