@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartForm));
             this.btnNewPdfw = new HZH_Controls.Controls.UCBtnExt();
             this.btnOpen = new HZH_Controls.Controls.UCBtnExt();
             this.ucBtnImgClose = new HZH_Controls.Controls.UCBtnImg();
             this.label1 = new System.Windows.Forms.Label();
             this.historyListBox = new System.Windows.Forms.ListBox();
+            this.tmWindowState = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnNewPdfw
@@ -155,6 +157,11 @@
             this.historyListBox.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.historyListBox_MeasureItem);
             this.historyListBox.SelectedIndexChanged += new System.EventHandler(this.historyListBox_SelectedIndexChanged);
             // 
+            // tmWindowState
+            // 
+            this.tmWindowState.Enabled = true;
+            this.tmWindowState.Tick += new System.EventHandler(this.tmWindowState_Tick);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -167,6 +174,7 @@
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnNewPdfw);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -182,6 +190,7 @@
         private HZH_Controls.Controls.UCBtnImg ucBtnImgClose;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.ListBox historyListBox;
+        public System.Windows.Forms.Timer tmWindowState;
     }
 }
 

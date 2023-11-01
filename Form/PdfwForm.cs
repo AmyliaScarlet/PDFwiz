@@ -13,6 +13,7 @@ using PDFwiz.Entity;
 using PDFwiz.Helper;
 using PDFwiz.Properties;
 using PDFwiz.Constants;
+using PDFwiz.Customize;
 
 namespace PDFwiz
 {
@@ -23,7 +24,8 @@ namespace PDFwiz
         public PdfwForm(Form mParentForm, FormCommand mFormCommand)
         {
             InitializeComponent();
-
+            FormComm.Instance.AddListenner(this.Name, this);
+            ApplicationStateMachine.Instance.NextState(ApplicationState.onOpenPdfw);
             parentForm = mParentForm;
             parentForm.Hide();
             if (mFormCommand.FormCommandType == FormCommandType.Open)
@@ -83,7 +85,9 @@ namespace PDFwiz
         {
             this.SizeChanged -= PdfwForm_SizeChanged;
 
-            parentForm.Show();
+            //parentForm.Show();
+
+            ApplicationStateMachine.Instance.NextState();
 
             base.OnClosed(e);
         }

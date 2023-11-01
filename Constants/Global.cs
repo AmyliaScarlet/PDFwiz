@@ -47,5 +47,10 @@ namespace PDFwiz
         public static string EditableDoc = "EditableDoc";
         public static string PdfDoc = "PdfDoc";
 
+
+        public const int WndProc_Comm_HideWindow = 0x100;
+        public const int WndProc_Comm_CloseWindow = 0x200;
+        public const int WndProc_Comm_OpenWindow = 0x300;
+
     }
 }

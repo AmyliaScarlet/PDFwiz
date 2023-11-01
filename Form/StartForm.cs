@@ -21,14 +21,20 @@ using Microsoft.Office.Interop.Word;
 using System.IO;
 using PDFwiz.Constants;
 using Newtonsoft.Json;
+using PDFwiz.Customize;
+using static System.Windows.Forms.AxHost;
 
 namespace PDFwiz
 {
     public partial class StartForm : Form
     {
+        
+
         public StartForm(string[] args)
         {
             InitializeComponent();
+            FormComm.Instance.AddListenner(this.Name, this);
+
 
             if (args.Length >= 2) 
             {
@@ -43,6 +49,7 @@ namespace PDFwiz
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            ApplicationStateMachine.Instance.NextState();
 
             FillHistoryList();
 
@@ -85,7 +92,10 @@ namespace PDFwiz
             string sDesktopDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);//获取系统桌面目录路径。
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
-
+            openFileDialog.AutoUpgradeEnabled = true;
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.CheckFileExists = true;
+            
             //设置对话框标题
             openFileDialog.Title = "选择文件";
             //设置文件类型
@@ -109,7 +119,6 @@ namespace PDFwiz
 
         private void OpenFile(string fileName) 
         {
-            
             FormCommand formCommand = new FormCommand(FormCommandType.Open, fileName);
             string ext = fileName.Substring(fileName.IndexOf('.') + 1, fileName.Length - (fileName.IndexOf('.') + 1));
             if (ext == "doc" || ext == "docx")
@@ -127,6 +136,9 @@ namespace PDFwiz
                 PdfwForm pdfwForm = new PdfwForm(this, formCommand);
                 pdfwForm.Show();
             }
+
+            
+
             this.Hide();
         }
 
@@ -143,6 +155,8 @@ namespace PDFwiz
                         FormCommand formCommand = new FormCommand(FormCommandType.New, fileName);
                         WordForm wordForm = new WordForm(this, formCommand);
                         wordForm.Show();
+
+                        ApplicationStateMachine.Instance.NextState(ApplicationState.onNew);
                     }
                    
                 }
@@ -243,15 +257,11 @@ namespace PDFwiz
             
         }
 
-        //private void historyListBox_MouseHover(object sender, EventArgs e)
-        //{
-        //    //var screenMousePos = Cursor.Position;
-        //    ////var chartMousePos = historyListBox.PointToClient(screenMousePos);
+        private void tmWindowState_Tick(object sender, EventArgs e)
+        {
+            FormComm.Instance.handleMessage();
+        }
 
-        //    //HistoryItemControl control = (HistoryItemControl)((ListBox)sender).GetChildAtPoint(screenMousePos, GetChildAtPointSkip.None);
-        //    //if (control != null)
-        //    //    control.BackColor = Color.White;
-
-        //}
+        
     }
 }

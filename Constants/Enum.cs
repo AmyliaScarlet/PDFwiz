@@ -37,4 +37,16 @@ namespace PDFwiz
         Other 
     }
 
+
+    public enum ApplicationState
+    { 
+        onStart,
+        onNew,
+        onOpenWord,
+        onOpenPdf,
+        onOpenPdfw,
+        onClose
+
+    }
+
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 using PDFwiz.Constants;
+using PDFwiz.Customize;
 using PDFwiz.Entity;
 using PDFwiz.Helper;
+using static System.Windows.Forms.AxHost;
 
 namespace PDFwiz
 {
@@ -13,6 +15,9 @@ namespace PDFwiz
         public PdfForm(Form mParentForm, FormCommand mFormCommand)
         {
             InitializeComponent();
+            FormComm.Instance.AddListenner(this.Name, this);
+
+            ApplicationStateMachine.Instance.NextState(ApplicationState.onOpenPdf);
 
             parentForm = mParentForm;
             parentForm.Hide();
@@ -28,22 +33,12 @@ namespace PDFwiz
         protected override void OnClosed(EventArgs e)
         {
             this.SizeChanged -= PdfForm_SizeChanged;
-            if (mPdfViewer != null) 
-            {
-                try
-                {
-                    mPdfViewer.CloseDocument();
-                    //mPdfViewer.Dispose();
 
-                }
-                catch { 
-                
-                }
-            }
-                
-            parentForm.Show();
+            //parentForm.Show();
 
-           
+            ApplicationStateMachine.Instance.NextState();
+
+            base.OnClosed(e);
         }
 
         public void LoadPdfByDocument(string fileName)

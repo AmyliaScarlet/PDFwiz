@@ -18,6 +18,9 @@ using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using WordLib = Microsoft.Office.Interop.Word;
 using PDFwiz.Constants;
+using PDFwiz.Customize;
+using HZH_Controls;
+using System.Runtime.InteropServices;
 
 namespace PDFwiz
 {
@@ -30,7 +33,7 @@ namespace PDFwiz
         public WordForm(Form mParentForm, FormCommand mFormCommand)
         {
             InitializeComponent();
-
+            FormComm.Instance.AddListenner(this.Name, this);
 
             parentForm = mParentForm;
             formCommand = mFormCommand;
@@ -39,10 +42,12 @@ namespace PDFwiz
 
             if (formCommand.FormCommandType == FormCommandType.Open)
             {
+                ApplicationStateMachine.Instance.NextState(ApplicationState.onOpenWord);
                 LoadWordByDocument(formCommand.CommandArgs);
             }
             if (formCommand.FormCommandType == FormCommandType.New)
             {
+                ApplicationStateMachine.Instance.NextState(ApplicationState.onNew);
                 CreateWordDocument(formCommand.CommandArgs);
             }
 
@@ -146,8 +151,67 @@ namespace PDFwiz
             }
         }
 
+        protected override void WndProc(ref System.Windows.Forms.Message m)
+        {
+            int msg = m.Msg;
+            switch (msg) 
+            {
+                case Global.WndProc_Comm_HideWindow:
+                    this.Hide();
+                    break;
+                case Global.WndProc_Comm_CloseWindow:
+                    this.Close();
+                    break;
+
+
+            }
+            base.WndProc(ref m);
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            this.Hide();
+        }
+
+        /// <summary>
+        /// 发送消息到指定窗口
+        /// </summary>
+        /// <param name="hWnd">其窗口程序将接收消息的窗口的句柄。如果此参数为HWND_BROADCAST，则消息将被发送到系统中所有顶层窗口，
+        /// 包括无效或不可见的非自身拥有的窗口、被覆盖的窗口和弹出式窗口，但消息不被发送到子窗口</param>
+        /// <param name="msg">指定被发送的消息</param>
+        /// <param name="wParam">指定附加的消息指定信息</param>
+        /// <param name="lParam">指定附加的消息指定信息</param>
+        /// <returns></returns>
+        [DllImport("User32.dll", EntryPoint = "SendMessage")]
+        private static extern IntPtr SendMessage(int hWnd, int msg, IntPtr wParam, IntPtr lParam);//窗口句柄、、
+
+        /// <summary>
+        /// 获取窗体句柄
+        /// </summary>
+        /// <param name="lpClassName">指向一个指定了类名的空结束字符串，或一个标识类名字符串的成员的指针。假设该參数为一个成员，
+        /// 则它必须为前次调用theGlobafAddAtom函数产生的全局成员。该成员为16位，必须位于IpClassName的低 16位，高位必须为 0</param>
+        /// <param name="lpWindowName">指向一个指定了窗体名（窗体标题）的空结束字符串。假设该參数为空，则为全部窗体全匹配</param>
+        /// <returns></returns>
+        [DllImport("User32.dll", EntryPoint = "FindWindow")]
+        private static extern int FindWindow(string lpClassName, string lpWindowName);
+
+        
+
+        public void mSendMassage(int nMessage) 
+        {
+            int WINDOW_HANDLER = FindWindow(null, this.Name);
+            if (WINDOW_HANDLER == 0)
+            {
+                throw new Exception("Could not find Main window!");//找不到主窗口
+            }
+            long result = SendMessage(WINDOW_HANDLER, nMessage, new IntPtr(0), new IntPtr(301)).ToInt64();
+
+        }
+
         void wordApp_DocumentBeforeClose(WordLib.Document Doc, ref bool Cancel)
         {
+            mSendMassage(Global.WndProc_Comm_HideWindow);
             try
             {
                 string docPath = Doc.FullName;
@@ -170,8 +234,7 @@ namespace PDFwiz
             finally {
 
                 TryQuitWordApplication();
-
-                //this.Close();
+                mSendMassage(Global.WndProc_Comm_CloseWindow);
             }
 
             
@@ -230,6 +293,7 @@ namespace PDFwiz
 
         }
 
+
      
 
         protected override void OnClosed(EventArgs e)
@@ -237,8 +301,12 @@ namespace PDFwiz
             TryQuitWordApplication();
 
             
-            parentForm.Show();
-            //base.OnClosed(e);
+            //parentForm.Show();
+
+
+            ApplicationStateMachine.Instance.NextState();
+           
+            base.OnClosed(e);
 
         }
     }

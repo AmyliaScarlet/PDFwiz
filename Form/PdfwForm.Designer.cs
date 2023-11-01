@@ -50,15 +50,15 @@
             // 
             // ucBtnEdit
             // 
-            this.ucBtnEdit.BackColor = System.Drawing.Color.Transparent;
-            this.ucBtnEdit.BtnBackColor = System.Drawing.Color.Transparent;
+            this.ucBtnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
+            this.ucBtnEdit.BtnBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
             this.ucBtnEdit.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ucBtnEdit.BtnForeColor = System.Drawing.Color.White;
             this.ucBtnEdit.BtnText = "编 辑";
-            this.ucBtnEdit.ConerRadius = 5;
+            this.ucBtnEdit.ConerRadius = 2;
             this.ucBtnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ucBtnEdit.EnabledMouseEffect = false;
-            this.ucBtnEdit.FillColor = System.Drawing.SystemColors.WindowFrame;
+            this.ucBtnEdit.FillColor = System.Drawing.Color.Silver;
             this.ucBtnEdit.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ucBtnEdit.IsRadius = true;
             this.ucBtnEdit.IsShowRect = true;
