@@ -32,7 +32,6 @@
             this.btnOK = new HZH_Controls.Controls.UCBtnExt();
             this.btnCancel = new HZH_Controls.Controls.UCBtnExt();
             this.tbDocName = new HZH_Controls.Controls.TextBoxEx();
-            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -42,9 +41,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(33, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 35);
+            this.label1.Size = new System.Drawing.Size(222, 35);
             this.label1.TabIndex = 6;
-            this.label1.Text = "新建文档";
+            this.label1.Text = "文档名称(无后缀)";
             // 
             // btnOK
             // 
@@ -106,7 +105,7 @@
             // 
             this.tbDocName.DecLength = 2;
             this.tbDocName.InputType = HZH_Controls.TextInputType.NotControl;
-            this.tbDocName.Location = new System.Drawing.Point(117, 97);
+            this.tbDocName.Location = new System.Drawing.Point(102, 104);
             this.tbDocName.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -124,18 +123,8 @@
             this.tbDocName.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbDocName.PromptText = "";
             this.tbDocName.RegexPattern = "";
-            this.tbDocName.Size = new System.Drawing.Size(185, 21);
+            this.tbDocName.Size = new System.Drawing.Size(176, 21);
             this.tbDocName.TabIndex = 9;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(50, 103);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "文档名称：";
             // 
             // InputDialogForm
             // 
@@ -143,7 +132,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(376, 227);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.tbDocName);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -163,6 +151,5 @@
         private HZH_Controls.Controls.UCBtnExt btnOK;
         private HZH_Controls.Controls.UCBtnExt btnCancel;
         private HZH_Controls.Controls.TextBoxEx tbDocName;
-        private System.Windows.Forms.Label label2;
     }
 }
